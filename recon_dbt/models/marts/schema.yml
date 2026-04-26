@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_reconciliation
+    description: "Three-way reconciliation of Stripe payments against the internal general ledger. Classifies every transaction as MATCHED, AMOUNT_MISMATCH, MISSING_IN_LEDGER, or DUPLICATE."
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier from the payment processor"
+        tests:
+          - not_null
+
+      - name: stripe_amount
+        description: "Transaction amount as reported by Stripe"
+        tests:
+          - not_null
+
+      - name: recon_status
+        description: "Reconciliation classification for this transaction"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['MATCHED', 'MISSING_IN_LEDGER', 'AMOUNT_MISMATCH', 'DUPLICATE']
+
+      - name: amount_variance
+        description: "Absolute difference between Stripe and Ledger amounts"
+        tests:
+          - not_null

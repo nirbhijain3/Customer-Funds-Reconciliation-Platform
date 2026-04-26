@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_stripe
+    description: "Cleaned and renamed Stripe transaction data from RAW.RAW_STRIPE"
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: amount
+        tests:
+          - not_null
+
+  - name: stg_ledger
+    description: "Cleaned and renamed internal ledger entries from RAW.RAW_LEDGER"
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+
+  - name: stg_adyen
+    description: "Cleaned and renamed Adyen transaction data from RAW.RAW_ADYEN"
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: amount
+        tests:
+          - not_null
