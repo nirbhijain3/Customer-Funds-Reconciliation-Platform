@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    database: RECON_DB
+    schema: RAW
+    tables:
+      - name: raw_stripe
+      - name: raw_adyen
+      - name: raw_ledger
